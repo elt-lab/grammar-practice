@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>中学英文法 並べ替えマスター</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --success: #16a34a;
+      --danger: #dc2626;
+      --bg: #f1f5f9;
+      --card: #ffffff;
+      --text: #0f172a;
+      --border: #cbd5e1;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 16px;
+      display: flex;
+      justify-content: center;
+    }
+    .container {
+      width: 100%;
+      max-width: 600px;
+      background: var(--card);
+      padding: 24px;
+      border-radius: 16px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      font-size: 14px;
+      color: #64748b;
+    }
+    .unit-tag {
+      background: #e0f2fe;
+      color: #0369a1;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-weight: bold;
+    }
+    .category-section {
+      margin-bottom: 24px;
+    }
+    .category-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #475569;
+      margin-bottom: 8px;
+      border-left: 4px solid var(--primary);
+      padding-left: 8px;
+    }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 10px;
+    }
+    .btn-category {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 8px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #1e293b;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+    }
+    .btn-category:hover {
+      background: #e0e7ff;
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+    .jp-box {
+      font-size: 19px;
+      font-weight: 700;
+      margin-bottom: 18px;
+      line-height: 1.4;
+      color: #0f172a;
+    }
+    .area-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: #64748b;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+    .answer-box {
+      min-height: 56px;
+      background: #f8fafc;
+      border: 2px dashed var(--border);
+      border-radius: 12px;
+      padding: 8px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+    .options-box {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      min-height: 48px;
+      margin-bottom: 20px;
+    }
+    .chip {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      user-select: none;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+    .chip:hover {
+      border-color: var(--primary);
+      transform: translateY(-1px);
+    }
+    .btn-row {
+      display: flex;
+      gap: 10px;
+    }
+    button {
+      flex: 1;
+      padding: 12px;
+      font-size: 15px;
+      font-weight: 700;
+      border-radius: 10px;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-submit { background: var(--primary); color: white; }
+    .btn-reset { background: #e2e8f0; color: #475569; }
+    .btn-back {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: #64748b;
+      padding: 6px 12px;
+      font-size: 12px;
+      border-radius: 6px;
+      flex: none;
+    }
+    .result-box {
+      margin-top: 18px;
+      padding: 16px;
+      border-radius: 10px;
+      display: none;
+    }
+    .result-correct { background: #ecfdf5; border: 1px solid #6ee7b7; color: #065f46; }
+    .result-wrong { background: #fef2f2; border: 1px solid #fca5a5; color: #991b1b; }
+    .explanation { margin-top: 10px; font-size: 14px; line-height: 1.5; color: #334155; }
+    .btn-next { margin-top: 12px; width: 100%; background: var(--text); color: white; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <!-- メニュー画面 -->
+  <div id="menu-view">
+    <h2 style="font-size: 20px; margin-top: 0; margin-bottom: 16px; text-align: center;">学習する項目を選んでね</h2>
+    
+    <div class="category-section">
+      <div class="category-title">教科書レッスン別</div>
+      <div class="menu-grid" id="lesson-buttons"></div>
+    </div>
+
+    <div class="category-section">
+      <div class="category-title">文法項目別</div>
+      <div class="menu-grid" id="grammar-buttons"></div>
+    </div>
+  </div>
+
+  <!-- クイズ画面 -->
+  <div id="quiz-view" style="display: none;">
+    <div class="header">
+      <div>
+        <button class="btn-back" onclick="backToMenu()">← メニューへ</button>
+        <span class="unit-tag" id="current-category-name" style="margin-left: 6px;"></span>
+      </div>
+      <span id="progress"></span>
+    </div>
+
+    <div class="jp-box" id="jp-text"></div>
+
+    <div class="area-label">解答欄（タップで戻せます）</div>
+    <div class="answer-box" id="answer-box"></div>
+
+    <div class="area-label">単語リスト</div>
+    <div class="options-box" id="options-box"></div>
+
+    <div class="btn-row">
+      <button class="btn-reset" onclick="resetCurrentQuestion()">やり直す</button>
+      <button class="btn-submit" onclick="checkAnswer()">判定する</button>
+    </div>
+
+    <div class="result-box" id="result-box">
+      <strong id="result-title"></strong>
+      <p id="correct-answer-text" style="font-weight: bold; margin: 6px 0;"></p>
+      <div class="explanation" id="explanation-text"></div>
+      <button class="btn-next" onclick="nextQuestion()">次の問題へ</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ==========================================
+  // 問題データ
+  // lesson: "Lesson 1" など
+  // grammar: "be動詞", "現在完了" など
+  // ==========================================
+  const quizData = [
+    {
+      lesson: "Lesson 1",
+      grammar: "be動詞（肯定文）",
+      japanese: "私はケンです。",
+      words: ["I", "am", "Ken", "."],
+      answer: "I am Ken .",
+      explanation: "主語が「I（私）」のときは be動詞「am」を使います。"
+    },
+    {
+      lesson: "Lesson 1",
+      grammar: "be動詞（肯定文）",
+      japanese: "あなたは親切です。",
+      words: ["You", "are", "kind", "."],
+      answer: "You are kind .",
+      explanation: "主語が「You（あなた）」のときは be動詞「are」を使います。"
+    },
+    {
+      lesson: "Lesson 1",
+      grammar: "be動詞（肯定文）",
+      japanese: "彼はオーストラリア出身です。",
+      words: ["He", "is", "from", "Australia", "."],
+      answer: "He is from Australia .",
+      explanation: "主語が「He（彼）」のときは be動詞「is」を使います。「be from 〜」で「〜出身」という意味です。"
+    },
+    {
+      lesson: "Lesson 1",
+      grammar: "be動詞（肯定文）",
+      japanese: "彼女はよい先生です。",
+      words: ["She", "is", "a", "good", "teacher", "."],
+      answer: "She is a good teacher .",
+      explanation: "「 She is ＋ a ＋ 形容詞 ＋ 名詞 」の語順です。数えられる名詞の単数形には a を忘れないようにしましょう。"
+    },
+    {
+      lesson: "Lesson 1",
+      grammar: "be動詞（肯定文）",
+      japanese: "これは私の新しいペンです。",
+      words: ["This", "is", "my", "new", "pen", "."],
+      answer: "This is my new pen .",
+      explanation: "「This（これ）」は1つのものを指すので be動詞は「is」になります。"
+    },
+    {
+      lesson: "Lesson 1",
+      grammar: "be動詞（肯定文）",
+      japanese: "あれは私たちの学校です。",
+      words: ["That", "is", "our", "school", "."],
+      answer: "That is our school .",
+      explanation: "遠くの1つのものを指す「That（あれ）」も be動詞は「is」です。「our」は「私たちの」という意味の代名詞です。"
+    },
+    {
+      lesson: "Lesson 1",
+      grammar: "be動詞（肯定文）",
+      japanese: "私たちはクラスメイトです。",
+      words: ["We", "are", "classmates", "."],
+      answer: "We are classmates .",
+      explanation: "「We（私たち）」は複数人なので be動詞は「are」を使います。名詞に複数の s がつく点も確認しましょう。"
+    },
+    {
+      lesson: "Lesson 1",
+      grammar: "be動詞（肯定文）",
+      japanese: "彼らは公園にいます。",
+      words: ["They", "are", "in", "the", "park", "."],
+      answer: "They are in the park .",
+      explanation: "「They（彼ら・彼女ら・それら）」は複数の主語なので be動詞は「are」です。「in the park」で場所（公園に）を表します。"
+    },
+    {
+      lesson: "Lesson 1",
+      grammar: "be動詞（肯定文）",
+      japanese: "マイクとエミは友達です。",
+      words: ["Mike", "and", "Emi", "are", "friends", "."],
+      answer: "Mike and Emi are friends .",
+      explanation: "「Mike and Emi」は2人（複数）なので、be動詞は is ではなく「are」になります。"
+    },
+    {
+      lesson: "Lesson 1",
+      grammar: "be動詞（肯定文）",
+      japanese: "その猫はとてもかわいいです。",
+      words: ["The", "cat", "is", "very", "cute", "."],
+      answer: "The cat is very cute .",
+      explanation: "「The cat」は1匹（単数）なので be動詞は「is」です。「very」は形容詞の前において「とても〜」と修飾します。"
+    }
+  ];
+
+  let currentCategoryType = ""; // 'lesson' または 'grammar'
+  let currentCategoryValue = "";
+  let currentQuestions = [];
+  let currentIndex = 0;
+  let userSelectedWords = [];
+  let availableWords = [];
+
+  // メニューボタンの生成
+  function initMenu() {
+    const lessons = [...new Set(quizData.map(q => q.lesson))];
+    const grammars = [...new Set(quizData.map(q => q.grammar))];
+
+    const lessonBox = document.getElementById('lesson-buttons');
+    lessonBox.innerHTML = '';
+    lessons.forEach(l => {
+      const btn = document.createElement('button');
+      btn.className = 'btn-category';
+      btn.innerText = l;
+      btn.onclick = () => startQuiz('lesson', l);
+      lessonBox.appendChild(btn);
+    });
+
+    const grammarBox = document.getElementById('grammar-buttons');
+    grammarBox.innerHTML = '';
+    grammars.forEach(g => {
+      const btn = document.createElement('button');
+      btn.className = 'btn-category';
+      btn.innerText = g;
+      btn.onclick = () => startQuiz('grammar', g);
+      grammarBox.appendChild(btn);
+    });
+  }
+
+  function startQuiz(type, value) {
+    currentCategoryType = type;
+    currentCategoryValue = value;
+    currentQuestions = quizData.filter(q => q[type] === value);
+    currentIndex = 0;
+
+    document.getElementById('menu-view').style.display = 'none';
+    document.getElementById('quiz-view').style.display = 'block';
+    document.getElementById('current-category-name').innerText = value;
+
+    loadQuestion(0);
+  }
+
+  function backToMenu() {
+    document.getElementById('quiz-view').style.display = 'none';
+    document.getElementById('menu-view').style.display = 'block';
+  }
+
+  function loadQuestion(index) {
+    const q = currentQuestions[index];
+    document.getElementById('progress').innerText = `第 ${index + 1} 問 / ${currentQuestions.length} 問`;
+    document.getElementById('jp-text').innerText = q.japanese;
+    document.getElementById('result-box').style.display = 'none';
+
+    availableWords = [...q.words].sort(() => Math.random() - 0.5);
+    userSelectedWords = [];
+    render();
+  }
+
+  function render() {
+    const ansBox = document.getElementById('answer-box');
+    const optBox = document.getElementById('options-box');
+    ansBox.innerHTML = '';
+    optBox.innerHTML = '';
+
+    userSelectedWords.forEach((word, idx) => {
+      const chip = document.createElement('button');
+      chip.className = 'chip';
+      chip.innerText = word;
+      chip.onclick = () => removeWord(idx);
+      ansBox.appendChild(chip);
+    });
+
+    availableWords.forEach((word, idx) => {
+      const chip = document.createElement('button');
+      chip.className = 'chip';
+      chip.innerText = word;
+      chip.onclick = () => selectWord(idx);
+      optBox.appendChild(chip);
+    });
+  }
+
+  function selectWord(idx) {
+    const word = availableWords.splice(idx, 1)[0];
+    userSelectedWords.push(word);
+    render();
+  }
+
+  function removeWord(idx) {
+    const word = userSelectedWords.splice(idx, 1)[0];
+    availableWords.push(word);
+    render();
+  }
+
+  function resetCurrentQuestion() {
+    loadQuestion(currentIndex);
+  }
+
+  function checkAnswer() {
+    const q = currentQuestions[currentIndex];
+    const userAns = userSelectedWords.join(' ');
+    const resultBox = document.getElementById('result-box');
+    const title = document.getElementById('result-title');
+    const correctAns = document.getElementById('correct-answer-text');
+    const exp = document.getElementById('explanation-text');
+
+    resultBox.style.display = 'block';
+
+    if (userAns === q.answer) {
+      resultBox.className = 'result-box result-correct';
+      title.innerText = '⭕ 正解！ Excellent!';
+      correctAns.innerText = '';
+    } else {
+      resultBox.className = 'result-box result-wrong';
+      title.innerText = '❌ 不正解... もう一度確認しよう';
+      correctAns.innerText = `正解: ${q.answer}`;
+    }
+    exp.innerText = q.explanation;
+  }
+
+  function nextQuestion() {
+    currentIndex = (currentIndex + 1) % currentQuestions.length;
+    loadQuestion(currentIndex);
+  }
+
+  initMenu();
+</script>
+
+</body>
+</html>
