@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>中学英文法 並べ替えマスター</title>
+  <title>中学英文法 並べ替えマスター (中1・東書)</title>
   <style>
     :root {
       --primary: #2563eb;
       --primary-hover: #1d4ed8;
       --success: #16a34a;
       --danger: #dc2626;
-      --bg: #f1f5f9;
+      --bg: #f8fafc;
       --card: #ffffff;
       --text: #0f172a;
       --border: #cbd5e1;
@@ -27,11 +27,11 @@
     }
     .container {
       width: 100%;
-      max-width: 600px;
+      max-width: 640px;
       background: var(--card);
       padding: 24px;
       border-radius: 16px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
     }
     .header {
       display: flex;
@@ -47,46 +47,49 @@
       padding: 4px 10px;
       border-radius: 20px;
       font-weight: bold;
+      font-size: 13px;
     }
-    .category-section {
-      margin-bottom: 24px;
-    }
-    .category-title {
-      font-size: 14px;
-      font-weight: 700;
-      color: #475569;
-      margin-bottom: 8px;
-      border-left: 4px solid var(--primary);
-      padding-left: 8px;
-    }
-    .menu-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    .menu-list {
+      display: flex;
+      flex-direction: column;
       gap: 10px;
+      margin-top: 16px;
     }
-    .btn-category {
-      background: #f8fafc;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 12px 8px;
-      font-size: 14px;
-      font-weight: 600;
-      color: #1e293b;
+    .btn-unit {
+      background: #ffffff;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 16px;
+      text-align: left;
       cursor: pointer;
-      text-align: center;
       transition: all 0.2s;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
     }
-    .btn-category:hover {
-      background: #e0e7ff;
+    .btn-unit:hover {
       border-color: var(--primary);
-      color: var(--primary);
+      background: #f0f7ff;
+      transform: translateY(-1px);
+    }
+    .btn-unit-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .btn-unit-grammar {
+      font-size: 13px;
+      color: #64748b;
     }
     .jp-box {
-      font-size: 19px;
+      font-size: 18px;
       font-weight: 700;
       margin-bottom: 18px;
-      line-height: 1.4;
+      line-height: 1.45;
       color: #0f172a;
+      background: #f1f5f9;
+      padding: 12px 16px;
+      border-radius: 10px;
     }
     .area-label {
       font-size: 12px;
@@ -96,11 +99,11 @@
       text-transform: uppercase;
     }
     .answer-box {
-      min-height: 56px;
+      min-height: 60px;
       background: #f8fafc;
       border: 2px dashed var(--border);
       border-radius: 12px;
-      padding: 8px;
+      padding: 10px;
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
@@ -111,15 +114,15 @@
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      min-height: 48px;
-      margin-bottom: 20px;
+      min-height: 52px;
+      margin-bottom: 22px;
     }
     .chip {
       background: white;
       border: 1px solid var(--border);
       border-radius: 8px;
       padding: 8px 14px;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 500;
       cursor: pointer;
       user-select: none;
@@ -143,6 +146,7 @@
       border: none;
     }
     .btn-submit { background: var(--primary); color: white; }
+    .btn-submit:hover { background: var(--primary-hover); }
     .btn-reset { background: #e2e8f0; color: #475569; }
     .btn-back {
       background: transparent;
@@ -161,26 +165,17 @@
     }
     .result-correct { background: #ecfdf5; border: 1px solid #6ee7b7; color: #065f46; }
     .result-wrong { background: #fef2f2; border: 1px solid #fca5a5; color: #991b1b; }
-    .explanation { margin-top: 10px; font-size: 14px; line-height: 1.5; color: #334155; }
     .btn-next { margin-top: 12px; width: 100%; background: var(--text); color: white; }
   </style>
 </head>
 <body>
 
 <div class="container">
-  <!-- メニュー画面 -->
+  <!-- トップメニュー -->
   <div id="menu-view">
-    <h2 style="font-size: 20px; margin-top: 0; margin-bottom: 16px; text-align: center;">学習する項目を選んでね</h2>
-    
-    <div class="category-section">
-      <div class="category-title">教科書レッスン別</div>
-      <div class="menu-grid" id="lesson-buttons"></div>
-    </div>
-
-    <div class="category-section">
-      <div class="category-title">文法項目別</div>
-      <div class="menu-grid" id="grammar-buttons"></div>
-    </div>
+    <h2 style="font-size: 20px; margin: 0 0 6px 0; text-align: center;">並べ替えドリル（東書1年）</h2>
+    <p style="font-size: 13px; color: #64748b; text-align: center; margin-bottom: 18px;">学習するUnitを選んでください</p>
+    <div class="menu-list" id="unit-buttons"></div>
   </div>
 
   <!-- クイズ画面 -->
@@ -188,7 +183,7 @@
     <div class="header">
       <div>
         <button class="btn-back" onclick="backToMenu()">← メニューへ</button>
-        <span class="unit-tag" id="current-category-name" style="margin-left: 6px;"></span>
+        <span class="unit-tag" id="current-unit-title" style="margin-left: 6px;"></span>
       </div>
       <span id="progress"></span>
     </div>
@@ -209,143 +204,169 @@
     <div class="result-box" id="result-box">
       <strong id="result-title"></strong>
       <p id="correct-answer-text" style="font-weight: bold; margin: 6px 0;"></p>
-      <div class="explanation" id="explanation-text"></div>
       <button class="btn-next" onclick="nextQuestion()">次の問題へ</button>
     </div>
   </div>
 </div>
 
 <script>
-  // ==========================================
-  // 問題データ
-  // lesson: "Lesson 1" など
-  // grammar: "be動詞", "現在完了" など
-  // ==========================================
-  const quizData = [
-    {
-      lesson: "Lesson 1",
-      grammar: "be動詞（肯定文）",
-      japanese: "私はケンです。",
-      words: ["I", "am", "Ken", "."],
-      answer: "I am Ken .",
-      explanation: "主語が「I（私）」のときは be動詞「am」を使います。"
-    },
-    {
-      lesson: "Lesson 1",
-      grammar: "be動詞（肯定文）",
-      japanese: "あなたは親切です。",
-      words: ["You", "are", "kind", "."],
-      answer: "You are kind .",
-      explanation: "主語が「You（あなた）」のときは be動詞「are」を使います。"
-    },
-    {
-      lesson: "Lesson 1",
-      grammar: "be動詞（肯定文）",
-      japanese: "彼はオーストラリア出身です。",
-      words: ["He", "is", "from", "Australia", "."],
-      answer: "He is from Australia .",
-      explanation: "主語が「He（彼）」のときは be動詞「is」を使います。「be from 〜」で「〜出身」という意味です。"
-    },
-    {
-      lesson: "Lesson 1",
-      grammar: "be動詞（肯定文）",
-      japanese: "彼女はよい先生です。",
-      words: ["She", "is", "a", "good", "teacher", "."],
-      answer: "She is a good teacher .",
-      explanation: "「 She is ＋ a ＋ 形容詞 ＋ 名詞 」の語順です。数えられる名詞の単数形には a を忘れないようにしましょう。"
-    },
-    {
-      lesson: "Lesson 1",
-      grammar: "be動詞（肯定文）",
-      japanese: "これは私の新しいペンです。",
-      words: ["This", "is", "my", "new", "pen", "."],
-      answer: "This is my new pen .",
-      explanation: "「This（これ）」は1つのものを指すので be動詞は「is」になります。"
-    },
-    {
-      lesson: "Lesson 1",
-      grammar: "be動詞（肯定文）",
-      japanese: "あれは私たちの学校です。",
-      words: ["That", "is", "our", "school", "."],
-      answer: "That is our school .",
-      explanation: "遠くの1つのものを指す「That（あれ）」も be動詞は「is」です。「our」は「私たちの」という意味の代名詞です。"
-    },
-    {
-      lesson: "Lesson 1",
-      grammar: "be動詞（肯定文）",
-      japanese: "私たちはクラスメイトです。",
-      words: ["We", "are", "classmates", "."],
-      answer: "We are classmates .",
-      explanation: "「We（私たち）」は複数人なので be動詞は「are」を使います。名詞に複数の s がつく点も確認しましょう。"
-    },
-    {
-      lesson: "Lesson 1",
-      grammar: "be動詞（肯定文）",
-      japanese: "彼らは公園にいます。",
-      words: ["They", "are", "in", "the", "park", "."],
-      answer: "They are in the park .",
-      explanation: "「They（彼ら・彼女ら・それら）」は複数の主語なので be動詞は「are」です。「in the park」で場所（公園に）を表します。"
-    },
-    {
-      lesson: "Lesson 1",
-      grammar: "be動詞（肯定文）",
-      japanese: "マイクとエミは友達です。",
-      words: ["Mike", "and", "Emi", "are", "friends", "."],
-      answer: "Mike and Emi are friends .",
-      explanation: "「Mike and Emi」は2人（複数）なので、be動詞は is ではなく「are」になります。"
-    },
-    {
-      lesson: "Lesson 1",
-      grammar: "be動詞（肯定文）",
-      japanese: "その猫はとてもかわいいです。",
-      words: ["The", "cat", "is", "very", "cute", "."],
-      answer: "The cat is very cute .",
-      explanation: "「The cat」は1匹（単数）なので be動詞は「is」です。「very」は形容詞の前において「とても〜」と修飾します。"
-    }
+  const unitList = [
+    { id: "Unit 1", name: "Unit 1", grammar: "I am / 一般動詞 / Do you...? / Are you...?" },
+    { id: "Unit 2", name: "Unit 2", grammar: "He [She] is... / can / This [That] is..." },
+    { id: "Unit 3", name: "Unit 3", grammar: "What / Who / How / When / Where" },
+    { id: "Unit 4", name: "Unit 4", grammar: "How many / What time / 命令文" },
+    { id: "Unit 5", name: "Unit 5", grammar: "三単現の -s, -es / 疑問文 / 否定文" },
+    { id: "Unit 6", name: "Unit 6", grammar: "him/her / Whose / Which" },
+    { id: "Unit 7", name: "Unit 7", grammar: "現在進行形 / 感嘆文 (How/What)" },
+    { id: "Unit 8", name: "Unit 8", grammar: "不定詞 (名詞的用法) / want to / look + 形容詞" },
+    { id: "Unit 9", name: "Unit 9", grammar: "一般動詞の過去形 / 疑問文 / 否定文" },
+    { id: "Unit 10", name: "Unit 10", grammar: "was/were / 過去進行形 / There is [are]" }
   ];
 
-  let currentCategoryType = ""; // 'lesson' または 'grammar'
-  let currentCategoryValue = "";
+  const quizData = [
+    // === UNIT 1 ===
+    { unit: "Unit 1", japanese: "私は健太です。", words: ["I", "am", "Kenta", "."], answer: "I am Kenta ." },
+    { unit: "Unit 1", japanese: "私はテニスが好きです。", words: ["I", "like", "tennis", "."], answer: "I like tennis ." },
+    { unit: "Unit 1", japanese: "私は名古屋の出身です。", words: ["I", "am", "from", "Nagoya", "."], answer: "I am from Nagoya ." },
+    { unit: "Unit 1", japanese: "私は緑茶が大好きです。", words: ["I", "love", "green tea", "."], answer: "I love green tea ." },
+    { unit: "Unit 1", japanese: "あなたは音楽が好きですか。―はい、好きです。", words: ["Do", "you", "like", "music", "?", "-", "Yes", ",", "I", "do", "."], answer: "Do you like music ? - Yes , I do ." },
+    { unit: "Unit 1", japanese: "あなたは野球をしますか。―いいえ、しません。", words: ["Do", "you", "play", "baseball", "?", "-", "No", ",", "I", "do", "not", "."], answer: "Do you play baseball ? - No , I do not ." },
+    { unit: "Unit 1", japanese: "私はピアノをひきません。", words: ["I", "do", "not", "play", "the piano", "."], answer: "I do not play the piano ." },
+    { unit: "Unit 1", japanese: "私はテニスを見ません。", words: ["I", "don't", "watch", "tennis", "."], answer: "I don't watch tennis ." },
+    { unit: "Unit 1", japanese: "あなたはサッカーファンですか。―はい、そうです。", words: ["Are", "you", "a soccer fan", "?", "-", "Yes", ",", "I", "am", "."], answer: "Are you a soccer fan ? - Yes , I am ." },
+    { unit: "Unit 1", japanese: "あなたは仙台の出身ですか。―いいえ、ちがいます。", words: ["Are", "you", "from", "Sendai", "?", "-", "No", ",", "I", "am", "not", "."], answer: "Are you from Sendai ? - No , I am not ." },
+    { unit: "Unit 1", japanese: "私はベッキー・ジョーンズではありません。", words: ["I", "am", "not", "Becky Jones", "."], answer: "I am not Becky Jones ." },
+    { unit: "Unit 1", japanese: "あなたはバレーボールチームの一員ですか。―はい、そうです。", words: ["Are", "you", "on", "the", "volleyball", "team", "?", "-", "Yes", ",", "I", "am", "."], answer: "Are you on the volleyball team ? - Yes , I am ." },
+    { unit: "Unit 1", japanese: "私は東京の出身ではありません。", words: ["I'm", "not", "from", "Tokyo", "."], answer: "I'm not from Tokyo ." },
+    { unit: "Unit 1", japanese: "あなたは今音楽部の一員ですか。―いいえ、ちがいます。", words: ["Are", "you", "in", "the music club", "now", "?", "-", "No", ",", "I'm", "not", "."], answer: "Are you in the music club now ? - No , I'm not ." },
+    { unit: "Unit 1", japanese: "私は野球ファンではありません。", words: ["I", "am", "not", "a", "baseball", "fan", "."], answer: "I am not a baseball fan ." },
+    { unit: "Unit 1", japanese: "【チャレンジ】新しいバットを持っているよ。", words: ["I", "have", "a", "new", "bat", "."], answer: "I have a new bat ." },
+
+    // === UNIT 2 ===
+    { unit: "Unit 2", japanese: "彼は私たちの先生です。", words: ["He", "is", "our", "teacher", "."], answer: "He is our teacher ." },
+    { unit: "Unit 2", japanese: "彼は美術部に入っていません。", words: ["He", "is", "not", "in", "the", "art", "club", "."], answer: "He is not in the art club ." },
+    { unit: "Unit 2", japanese: "彼女は私たちの友達です。", words: ["She", "is", "our", "friend", "."], answer: "She is our friend ." },
+    { unit: "Unit 2", japanese: "彼女はテニスファンではありません。", words: ["She", "is", "not", "a tennis fan", "."], answer: "She is not a tennis fan ." },
+    { unit: "Unit 2", japanese: "彼は野球をするのがじょうずですか。―はい、そうです。", words: ["Is", "he", "good", "at", "playing", "baseball", "?", "-", "Yes", ",", "he", "is", "."], answer: "Is he good at playing baseball ? - Yes , he is ." },
+    { unit: "Unit 2", japanese: "彼女は好意的ですか。―いいえ、ちがいます。", words: ["Is", "she", "friendly", "?", "-", "No", ",", "she", "is", "not", "."], answer: "Is she friendly ? - No , she is not ." },
+    { unit: "Unit 2", japanese: "私は英語を読むことができます。", words: ["I", "can", "read", "English", "."], answer: "I can read English ." },
+    { unit: "Unit 2", japanese: "私たちはじょうずに歌うことができません。", words: ["We", "cannot", "sing", "well", "."], answer: "We cannot sing well ." },
+    { unit: "Unit 2", japanese: "あなたはピアノをひくことができますか。―はい、できます。", words: ["Can", "you", "play", "the piano", "?", "-", "Yes", ",", "I", "can", "."], answer: "Can you play the piano ? - Yes , I can ." },
+    { unit: "Unit 2", japanese: "あなたはカレーを作ることができますか。―いいえ、できません。", words: ["Can", "you", "make", "curry", "?", "-", "No", ",", "I", "cannot", "."], answer: "Can you make curry ? - No , I cannot ." },
+    { unit: "Unit 2", japanese: "これはあなたの自転車です。", words: ["This", "is", "your", "bike", "."], answer: "This is your bike ." },
+    { unit: "Unit 2", japanese: "あれは私たちの学校です。", words: ["That", "is", "our", "school", "."], answer: "That is our school ." },
+    { unit: "Unit 2", japanese: "あれはパンダですか。―はい、そうです。", words: ["Is", "that", "a panda", "?", "-", "Yes", ",", "it", "is", "."], answer: "Is that a panda ? - Yes , it is ." },
+    { unit: "Unit 2", japanese: "これは時計ですか。―いいえ、ちがいます。", words: ["Is", "this", "a clock", "?", "-", "No", ",", "it", "is", "not", "."], answer: "Is this a clock ? - No , it is not ." },
+    { unit: "Unit 2", japanese: "【チャレンジ】私は朝昼晩ピザでもいいよ。", words: ["I", "can", "eat", "pizza", "for breakfast, lunch, and dinner", "."], answer: "I can eat pizza for breakfast, lunch, and dinner ." },
+
+    // === UNIT 3 ===
+    { unit: "Unit 3", japanese: "あれは何ですか。―それは学校です。", words: ["What", "is", "that", "?", "-", "It", "is", "a school", "."], answer: "What is that ? - It is a school ." },
+    { unit: "Unit 3", japanese: "こちらはだれですか。―彼は裕太です。", words: ["Who", "is", "this", "?", "-", "He", "is", "Yuta", "."], answer: "Who is this ? - He is Yuta ." },
+    { unit: "Unit 3", japanese: "あなたはどのように店に来ますか。―私は歩いて店に来ます。", words: ["How", "do", "you", "come", "to", "the shop", "?", "-", "I", "walk", "to", "the shop", "."], answer: "How do you come to the shop ? - I walk to the shop ." },
+    { unit: "Unit 3", japanese: "あなたはいつテニスをしますか。", words: ["When", "do", "you", "play", "tennis", "?"], answer: "When do you play tennis ?" },
+    { unit: "Unit 3", japanese: "私のバッグはどこにありますか。―それはあなたの部屋の中にあります。", words: ["Where", "is", "my", "bag", "?", "-", "It", "is", "in", "your room", "."], answer: "Where is my bag ? - It is in your room ." },
+
+    // === UNIT 4 ===
+    { unit: "Unit 4", japanese: "あなたはリンゴを何個ほしいですか。―私は3個のリンゴがほしいです。", words: ["How", "many", "apples", "do", "you", "want", "?", "-", "I", "want", "three", "apples", "."], answer: "How many apples do you want ? - I want three apples ." },
+    { unit: "Unit 4", japanese: "何時ですか。―11時です。", words: ["What", "time", "is", "it", "?", "-", "It", "is", "eleven", "."], answer: "What time is it ? - It is eleven ." },
+    { unit: "Unit 4", japanese: "あなたはどんな音楽が好きですか。―私はロックが好きです。", words: ["What", "music", "do", "you", "like", "?", "-", "I", "like", "rock", "."], answer: "What music do you like ? - I like rock ." },
+    { unit: "Unit 4", japanese: "私の傘を使いなさい。", words: ["Use", "my", "umbrella", "."], answer: "Use my umbrella ." },
+    { unit: "Unit 4", japanese: "親切にして、彩。", words: ["Be", "kind", ",", "Aya", "."], answer: "Be kind , Aya ." },
+    { unit: "Unit 4", japanese: "走ってはいけません。", words: ["Don't", "run", "."], answer: "Don't run ." },
+
+    // === UNIT 5 ===
+    { unit: "Unit 5", japanese: "絵美は毎日バスケットボールをします。", words: ["Emi", "plays", "basketball", "every day", "."], answer: "Emi plays basketball every day ." },
+    { unit: "Unit 5", japanese: "私の兄はアメリカに住んでいます。", words: ["My", "brother", "lives", "in America", "."], answer: "My brother lives in America ." },
+    { unit: "Unit 5", japanese: "ブラウンさんはたいてい昼食にカレーを食べます。", words: ["Mr. Brown", "usually", "eats", "curry and rice", "for lunch", "."], answer: "Mr. Brown usually eats curry and rice for lunch ." },
+    { unit: "Unit 5", japanese: "亮は週末によく図書館に行きます。", words: ["Ryo", "often", "goes", "to", "the library", "on weekends", "."], answer: "Ryo often goes to the library on weekends ." },
+    { unit: "Unit 5", japanese: "エレンはてんぷらが好きですか。―はい、好きです。", words: ["Does", "Ellen", "like", "tempura", "?", "-", "Yes", ",", "she", "does", "."], answer: "Does Ellen like tempura ? - Yes , she does ." },
+    { unit: "Unit 5", japanese: "健はピアノをひきますか。―いいえ、ひきません。", words: ["Does", "Ken", "play", "the piano", "?", "-", "No", ",", "he", "does", "not", "."], answer: "Does Ken play the piano ? - No , he does not ." },
+    { unit: "Unit 5", japanese: "アレックスは牛乳が好きではありません。", words: ["Alex", "does", "not", "like", "milk", "."], answer: "Alex does not like milk ." },
+    { unit: "Unit 5", japanese: "私の姉はテニスをしません。", words: ["My sister", "doesn't", "play", "tennis", "."], answer: "My sister doesn't play tennis ." },
+    { unit: "Unit 5", japanese: "【チャレンジ】ぼくのイヌはときどき新聞を読むんだ。", words: ["My dog", "sometimes", "reads", "a newspaper", "."], answer: "My dog sometimes reads a newspaper ." },
+
+    // === UNIT 6 ===
+    { unit: "Unit 6", japanese: "あの人はジョーンズさんです。あなたは彼を知っていますか。", words: ["That is Mr. Jones.", "Do", "you", "know", "him", "?"], answer: "That is Mr. Jones. Do you know him ?" },
+    { unit: "Unit 6", japanese: "あの人はジェーンです。あなたは彼女が好きですか。", words: ["That is Jane.", "Do", "you", "like", "her", "?"], answer: "That is Jane. Do you like her ?" },
+    { unit: "Unit 6", japanese: "これはだれのカップですか。―それはあなたのものです。", words: ["Whose", "cup", "is", "this", "?", "-", "It", "is", "yours", "."], answer: "Whose cup is this ? - It is yours ." },
+    { unit: "Unit 6", japanese: "あれはだれのベッドですか。―それは私の母のものです。", words: ["Whose", "bed", "is", "that", "?", "-", "It's", "my mother's", "."], answer: "Whose bed is that ? - It's my mother's ." },
+    { unit: "Unit 6", japanese: "あなたはサッカーとテニスのどちらをしますか。―私はテニスをします。", words: ["Which", "do", "you", "play", ",", "soccer", "or", "tennis", "?", "-", "I", "play", "tennis", "."], answer: "Which do you play , soccer or tennis ? - I play tennis ." },
+
+    // === UNIT 7 ===
+    { unit: "Unit 7", japanese: "私は今、昼食を食べています。", words: ["I", "am", "eating", "lunch", "now", "."], answer: "I am eating lunch now ." },
+    { unit: "Unit 7", japanese: "彼らは今、数学を勉強しています。", words: ["They", "are", "studying", "math", "now", "."], answer: "They are studying math now ." },
+    { unit: "Unit 7", japanese: "姉は今、英語の本を読んでいます。", words: ["My sister", "is", "reading", "an English book", "now", "."], answer: "My sister is reading an English book now ." },
+    { unit: "Unit 7", japanese: "あなたはテレビを見ていますか。―はい、そうです。", words: ["Are", "you", "watching", "TV", "?", "-", "Yes", ",", "I", "am", "."], answer: "Are you watching TV ? - Yes , I am ." },
+    { unit: "Unit 7", japanese: "ボブは紅茶を飲んでいますか。―いいえ、ちがいます。", words: ["Is", "Bob", "drinking", "tea", "?", "-", "No", ",", "he", "is", "not", "."], answer: "Is Bob drinking tea ? - No , he is not ." },
+    { unit: "Unit 7", japanese: "あなたたちは何をしていますか。―私たちは泳いでいます。", words: ["What", "are", "you", "doing", "?", "-", "We", "are", "swimming", "."], answer: "What are you doing ? - We are swimming ." },
+    { unit: "Unit 7", japanese: "なんて美しいのでしょう！", words: ["How", "beautiful", "!"], answer: "How beautiful !" },
+    { unit: "Unit 7", japanese: "なんて小さな子イヌでしょう！", words: ["What", "a", "small", "puppy", "!"], answer: "What a small puppy !" },
+
+    // === UNIT 8 ===
+    { unit: "Unit 8", japanese: "和也は先生になりたいと思っています。", words: ["Kazuya", "wants", "to", "become", "a teacher", "."], answer: "Kazuya wants to become a teacher ." },
+    { unit: "Unit 8", japanese: "絵美はいつも英語を話そうと試みます。", words: ["Emi", "always", "tries", "to", "speak", "English", "."], answer: "Emi always tries to speak English ." },
+    { unit: "Unit 8", japanese: "あなたはどこに行きたいですか。―私は奈良に行きたいです。", words: ["Where", "do", "you", "want", "to", "go", "?", "-", "I", "want", "to", "go", "to", "Nara", "."], answer: "Where do you want to go ? - I want to go to Nara ." },
+    { unit: "Unit 8", japanese: "私の母は幸せそうに見えます。", words: ["My mother", "looks", "happy", "."], answer: "My mother looks happy ." },
+    { unit: "Unit 8", japanese: "彼女のかばんは新しそうに見えません。", words: ["Her bag", "does", "not", "look", "new", "."], answer: "Her bag does not look new ." },
+    { unit: "Unit 8", japanese: "【チャレンジ】一日中ベッドの上にいたいな。", words: ["I", "want", "to", "stay", "in bed", "all day", "."], answer: "I want to stay in bed all day ." },
+
+    // === UNIT 9 ===
+    { unit: "Unit 9", japanese: "私は先週将棋をしました。", words: ["I", "played", "shogi", "last week", "."], answer: "I played shogi last week ." },
+    { unit: "Unit 9", japanese: "私はたくさんの人々をそのパーティーで見ました。", words: ["I", "saw", "many", "people", "at the party", "."], answer: "I saw many people at the party ." },
+    { unit: "Unit 9", japanese: "小野さんはこの冬金沢を訪れました。", words: ["Ms. Ono", "visited", "Kanazawa", "this winter", "."], answer: "Ms. Ono visited Kanazawa this winter ." },
+    { unit: "Unit 9", japanese: "私は今朝友達に会いました。", words: ["I", "met", "my friends", "this morning", "."], answer: "I met my friends this morning ." },
+    { unit: "Unit 9", japanese: "ボブは妹の宿題を手伝いました。", words: ["Bob", "helped", "his sister", "with", "her homework", "."], answer: "Bob helped his sister with her homework ." },
+    { unit: "Unit 9", japanese: "私たちは図書館に行ってそこで勉強しました。", words: ["We", "went", "to", "the library", "and", "studied", "there", "."], answer: "We went to the library and studied there ." },
+    { unit: "Unit 9", japanese: "あなたはこの前の日曜日に音楽を聞きましたか。―はい、聞きました。", words: ["Did", "you", "listen", "to", "music", "last Sunday", "?", "-", "Yes", ",", "I", "did", "."], answer: "Did you listen to music last Sunday ? - Yes , I did ." },
+    { unit: "Unit 9", japanese: "由香は自分の部屋をそうじしましたか。―いいえ、しませんでした。", words: ["Did", "Yuka", "clean", "her room", "?", "-", "No", ",", "she", "did", "not", "."], answer: "Did Yuka clean her room ? - No , she did not ." },
+    { unit: "Unit 9", japanese: "あなたのお父さんは昼食を作りましたか。―いいえ、作りませんでした。", words: ["Did", "your father", "make", "lunch", "?", "-", "No", ",", "he", "didn't", "."], answer: "Did your father make lunch ? - No , he didn't ." },
+    { unit: "Unit 9", japanese: "彼らは今日ケーキを買いましたか。―はい、買いました。", words: ["Did", "they", "buy", "any", "cakes", "today", "?", "-", "Yes", ",", "they", "did", "."], answer: "Did they buy any cakes today ? - Yes , they did ." },
+    { unit: "Unit 9", japanese: "その生徒たちは先月何を楽しみましたか。", words: ["What", "did", "the students", "enjoy", "last month", "?"], answer: "What did the students enjoy last month ?" },
+    { unit: "Unit 9", japanese: "私たちは昨年英国に行きませんでした。", words: ["We", "did", "not", "go", "to", "the U.K.", "last year", "."], answer: "We did not go to the U.K. last year ." },
+    { unit: "Unit 9", japanese: "妹はこの前の日曜日にサッカーの練習をしませんでした。", words: ["My sister", "didn't", "practice", "soccer", "last Sunday", "."], answer: "My sister didn't practice soccer last Sunday ." },
+    { unit: "Unit 9", japanese: "私たちはこの夏、写真を撮りませんでした。", words: ["We", "did", "not", "take", "pictures", "this summer", "."], answer: "We did not take pictures this summer ." },
+    { unit: "Unit 9", japanese: "ボブと咲は先週宿題をしませんでした。", words: ["Bob and Saki", "did", "not", "do", "their", "homework", "last week", "."], answer: "Bob and Saki did not do their homework last week ." },
+    { unit: "Unit 9", japanese: "私は今日朝食を食べませんでした。", words: ["I", "didn't", "eat", "breakfast", "today", "."], answer: "I didn't eat breakfast today ." },
+    { unit: "Unit 9", japanese: "【チャレンジ】昨日、クッキーを全部食べたよ。", words: ["I", "ate", "all the cookies", "yesterday", "."], answer: "I ate all the cookies yesterday ." },
+
+    // === UNIT 10 ===
+    { unit: "Unit 10", japanese: "あなたは先週末、ひまでしたか。―はい、そうでした。", words: ["Were", "you", "free", "last weekend", "?", "-", "Yes", ",", "I", "was", "."], answer: "Were you free last weekend ? - Yes , I was ." },
+    { unit: "Unit 10", japanese: "私は昨年、学生でした。", words: ["I", "was", "a student", "last year", "."], answer: "I was a student last year ." },
+    { unit: "Unit 10", japanese: "私はそのとき宿題をしていました。", words: ["I", "was", "doing", "my homework", "then", "."], answer: "I was doing my homework then ." },
+    { unit: "Unit 10", japanese: "私の両親は正午に公園を歩いていませんでした。", words: ["My parents", "were", "not", "walking", "in the park", "at noon", "."], answer: "My parents were not walking in the park at noon ." },
+    { unit: "Unit 10", japanese: "あの木のそばにウサギが1羽います。", words: ["There", "is", "a rabbit", "by that tree", "."], answer: "There is a rabbit by that tree ." },
+    { unit: "Unit 10", japanese: "駅の近くに図書館はありますか。―はい、あります。", words: ["Is", "there", "a library", "near the station", "?", "-", "Yes", ",", "there", "is", "."], answer: "Is there a library near the station ? - Yes , there is ." },
+    { unit: "Unit 10", japanese: "机の上にカップが4つあります。", words: ["There", "are", "four", "cups", "on the desk", "."], answer: "There are four cups on the desk ." }
+  ];
+
   let currentQuestions = [];
   let currentIndex = 0;
   let userSelectedWords = [];
   let availableWords = [];
 
-  // メニューボタンの生成
   function initMenu() {
-    const lessons = [...new Set(quizData.map(q => q.lesson))];
-    const grammars = [...new Set(quizData.map(q => q.grammar))];
+    const unitBox = document.getElementById('unit-buttons');
+    unitBox.innerHTML = '';
 
-    const lessonBox = document.getElementById('lesson-buttons');
-    lessonBox.innerHTML = '';
-    lessons.forEach(l => {
+    unitList.forEach(u => {
       const btn = document.createElement('button');
-      btn.className = 'btn-category';
-      btn.innerText = l;
-      btn.onclick = () => startQuiz('lesson', l);
-      lessonBox.appendChild(btn);
-    });
-
-    const grammarBox = document.getElementById('grammar-buttons');
-    grammarBox.innerHTML = '';
-    grammars.forEach(g => {
-      const btn = document.createElement('button');
-      btn.className = 'btn-category';
-      btn.innerText = g;
-      btn.onclick = () => startQuiz('grammar', g);
-      grammarBox.appendChild(btn);
+      btn.className = 'btn-unit';
+      btn.innerHTML = `
+        <span class="btn-unit-title">${u.name}</span>
+        <span class="btn-unit-grammar">${u.grammar}</span>
+      `;
+      btn.onclick = () => startUnit(u.id, `${u.name}（${u.grammar}）`);
+      unitBox.appendChild(btn);
     });
   }
 
-  function startQuiz(type, value) {
-    currentCategoryType = type;
-    currentCategoryValue = value;
-    currentQuestions = quizData.filter(q => q[type] === value);
+  function startUnit(unitId, displayTitle) {
+    currentQuestions = quizData.filter(q => q.unit === unitId);
     currentIndex = 0;
 
     document.getElementById('menu-view').style.display = 'none';
     document.getElementById('quiz-view').style.display = 'block';
-    document.getElementById('current-category-name').innerText = value;
+    document.getElementById('current-unit-title').innerText = displayTitle;
 
     loadQuestion(0);
   }
@@ -411,7 +432,6 @@
     const resultBox = document.getElementById('result-box');
     const title = document.getElementById('result-title');
     const correctAns = document.getElementById('correct-answer-text');
-    const exp = document.getElementById('explanation-text');
 
     resultBox.style.display = 'block';
 
@@ -424,12 +444,16 @@
       title.innerText = '❌ 不正解... もう一度確認しよう';
       correctAns.innerText = `正解: ${q.answer}`;
     }
-    exp.innerText = q.explanation;
   }
 
   function nextQuestion() {
-    currentIndex = (currentIndex + 1) % currentQuestions.length;
-    loadQuestion(currentIndex);
+    if (currentIndex < currentQuestions.length - 1) {
+      currentIndex++;
+      loadQuestion(currentIndex);
+    } else {
+      alert('このUnitの全問が終了しました！お疲れ様でした。');
+      backToMenu();
+    }
   }
 
   initMenu();
