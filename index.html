@@ -88,8 +88,15 @@
       line-height: 1.45;
       color: #0f172a;
       background: #f1f5f9;
-      padding: 12px 16px;
+      padding: 14px 16px;
       border-radius: 10px;
+    }
+    .context-hint {
+      font-size: 13px;
+      font-weight: normal;
+      color: #64748b;
+      margin-bottom: 4px;
+      display: block;
     }
     .area-label {
       font-size: 12px;
@@ -225,118 +232,152 @@
 
   const quizData = [
     // === UNIT 1 ===
-    { unit: "Unit 1", japanese: "私は健太です。", words: ["I", "am", "Kenta", "."], answer: "I am Kenta ." },
-    { unit: "Unit 1", japanese: "私はテニスが好きです。", words: ["I", "like", "tennis", "."], answer: "I like tennis ." },
-    { unit: "Unit 1", japanese: "私は名古屋の出身です。", words: ["I", "am", "from", "Nagoya", "."], answer: "I am from Nagoya ." },
-    { unit: "Unit 1", japanese: "私は緑茶が大好きです。", words: ["I", "love", "green tea", "."], answer: "I love green tea ." },
-    { unit: "Unit 1", japanese: "あなたは音楽が好きですか。―はい、好きです。", words: ["Do", "you", "like", "music", "?", "-", "Yes", ",", "I", "do", "."], answer: "Do you like music ? - Yes , I do ." },
-    { unit: "Unit 1", japanese: "あなたは野球をしますか。―いいえ、しません。", words: ["Do", "you", "play", "baseball", "?", "-", "No", ",", "I", "do", "not", "."], answer: "Do you play baseball ? - No , I do not ." },
-    { unit: "Unit 1", japanese: "私はピアノをひきません。", words: ["I", "do", "not", "play", "the piano", "."], answer: "I do not play the piano ." },
-    { unit: "Unit 1", japanese: "私はテニスを見ません。", words: ["I", "don't", "watch", "tennis", "."], answer: "I don't watch tennis ." },
-    { unit: "Unit 1", japanese: "あなたはサッカーファンですか。―はい、そうです。", words: ["Are", "you", "a soccer fan", "?", "-", "Yes", ",", "I", "am", "."], answer: "Are you a soccer fan ? - Yes , I am ." },
-    { unit: "Unit 1", japanese: "あなたは仙台の出身ですか。―いいえ、ちがいます。", words: ["Are", "you", "from", "Sendai", "?", "-", "No", ",", "I", "am", "not", "."], answer: "Are you from Sendai ? - No , I am not ." },
-    { unit: "Unit 1", japanese: "私はベッキー・ジョーンズではありません。", words: ["I", "am", "not", "Becky Jones", "."], answer: "I am not Becky Jones ." },
-    { unit: "Unit 1", japanese: "あなたはバレーボールチームの一員ですか。―はい、そうです。", words: ["Are", "you", "on", "the", "volleyball", "team", "?", "-", "Yes", ",", "I", "am", "."], answer: "Are you on the volleyball team ? - Yes , I am ." },
-    { unit: "Unit 1", japanese: "私は東京の出身ではありません。", words: ["I'm", "not", "from", "Tokyo", "."], answer: "I'm not from Tokyo ." },
-    { unit: "Unit 1", japanese: "あなたは今音楽部の一員ですか。―いいえ、ちがいます。", words: ["Are", "you", "in", "the music club", "now", "?", "-", "No", ",", "I'm", "not", "."], answer: "Are you in the music club now ? - No , I'm not ." },
-    { unit: "Unit 1", japanese: "私は野球ファンではありません。", words: ["I", "am", "not", "a", "baseball", "fan", "."], answer: "I am not a baseball fan ." },
-    { unit: "Unit 1", japanese: "【チャレンジ】新しいバットを持っているよ。", words: ["I", "have", "a", "new", "bat", "."], answer: "I have a new bat ." },
+    { unit: "Unit 1", japanese: "私は健太です。", words: ["I", "am", "Kenta"], answer: "I am Kenta." },
+    { unit: "Unit 1", japanese: "私はテニスが好きです。", words: ["I", "like", "tennis"], answer: "I like tennis." },
+    { unit: "Unit 1", japanese: "私は名古屋の出身です。", words: ["I", "am", "from", "Nagoya"], answer: "I am from Nagoya." },
+    { unit: "Unit 1", japanese: "私は緑茶が大好きです。", words: ["I", "love", "green tea"], answer: "I love green tea." },
+    { unit: "Unit 1", japanese: "あなたは音楽が好きですか。", words: ["Do", "you", "like", "music"], answer: "Do you like music?" },
+    { unit: "Unit 1", hint: "「Do you like music?」への返答", japanese: "はい、好きです。", words: ["Yes,", "I", "do"], answer: "Yes, I do." },
+    { unit: "Unit 1", japanese: "あなたは野球をしますか。", words: ["Do", "you", "play", "baseball"], answer: "Do you play baseball?" },
+    { unit: "Unit 1", hint: "「Do you play baseball?」への返答", japanese: "いいえ、しません。", words: ["No,", "I", "do", "not"], answer: "No, I do not." },
+    { unit: "Unit 1", japanese: "私はピアノをひきません。", words: ["I", "do", "not", "play", "the piano"], answer: "I do not play the piano." },
+    { unit: "Unit 1", japanese: "私はテニスを見ません。", words: ["I", "don't", "watch", "tennis"], answer: "I don't watch tennis." },
+    { unit: "Unit 1", japanese: "あなたはサッカーファンですか。", words: ["Are", "you", "a soccer fan"], answer: "Are you a soccer fan?" },
+    { unit: "Unit 1", hint: "「Are you a soccer fan?」への返答", japanese: "はい、そうです。", words: ["Yes,", "I", "am"], answer: "Yes, I am." },
+    { unit: "Unit 1", japanese: "あなたは仙台の出身ですか。", words: ["Are", "you", "from", "Sendai"], answer: "Are you from Sendai?" },
+    { unit: "Unit 1", hint: "「Are you from Sendai?」への返答", japanese: "いいえ、ちがいます。", words: ["No,", "I", "am", "not"], answer: "No, I am not." },
+    { unit: "Unit 1", japanese: "私はベッキー・ジョーンズではありません。", words: ["I", "am", "not", "Becky Jones"], answer: "I am not Becky Jones." },
+    { unit: "Unit 1", japanese: "あなたはバレーボールチームの一員ですか。", words: ["Are", "you", "on", "the", "volleyball team"], answer: "Are you on the volleyball team?" },
+    { unit: "Unit 1", hint: "「Are you on the volleyball team?」への返答", japanese: "はい、そうです。", words: ["Yes,", "I", "am"], answer: "Yes, I am." },
+    { unit: "Unit 1", japanese: "私は東京の出身ではありません。", words: ["I'm", "not", "from", "Tokyo"], answer: "I'm not from Tokyo." },
+    { unit: "Unit 1", japanese: "あなたは今音楽部の一員ですか。", words: ["Are", "you", "in", "the music club", "now"], answer: "Are you in the music club now?" },
+    { unit: "Unit 1", hint: "「Are you in the music club now?」への返答", japanese: "いいえ、ちがいます。", words: ["No,", "I'm", "not"], answer: "No, I'm not." },
+    { unit: "Unit 1", japanese: "私は野球ファンではありません。", words: ["I", "am", "not", "a", "baseball fan"], answer: "I am not a baseball fan." },
+    { unit: "Unit 1", japanese: "【チャレンジ】新しいバットを持っているよ。", words: ["I", "have", "a", "new bat"], answer: "I have a new bat." },
 
     // === UNIT 2 ===
-    { unit: "Unit 2", japanese: "彼は私たちの先生です。", words: ["He", "is", "our", "teacher", "."], answer: "He is our teacher ." },
-    { unit: "Unit 2", japanese: "彼は美術部に入っていません。", words: ["He", "is", "not", "in", "the", "art", "club", "."], answer: "He is not in the art club ." },
-    { unit: "Unit 2", japanese: "彼女は私たちの友達です。", words: ["She", "is", "our", "friend", "."], answer: "She is our friend ." },
-    { unit: "Unit 2", japanese: "彼女はテニスファンではありません。", words: ["She", "is", "not", "a tennis fan", "."], answer: "She is not a tennis fan ." },
-    { unit: "Unit 2", japanese: "彼は野球をするのがじょうずですか。―はい、そうです。", words: ["Is", "he", "good", "at", "playing", "baseball", "?", "-", "Yes", ",", "he", "is", "."], answer: "Is he good at playing baseball ? - Yes , he is ." },
-    { unit: "Unit 2", japanese: "彼女は好意的ですか。―いいえ、ちがいます。", words: ["Is", "she", "friendly", "?", "-", "No", ",", "she", "is", "not", "."], answer: "Is she friendly ? - No , she is not ." },
-    { unit: "Unit 2", japanese: "私は英語を読むことができます。", words: ["I", "can", "read", "English", "."], answer: "I can read English ." },
-    { unit: "Unit 2", japanese: "私たちはじょうずに歌うことができません。", words: ["We", "cannot", "sing", "well", "."], answer: "We cannot sing well ." },
-    { unit: "Unit 2", japanese: "あなたはピアノをひくことができますか。―はい、できます。", words: ["Can", "you", "play", "the piano", "?", "-", "Yes", ",", "I", "can", "."], answer: "Can you play the piano ? - Yes , I can ." },
-    { unit: "Unit 2", japanese: "あなたはカレーを作ることができますか。―いいえ、できません。", words: ["Can", "you", "make", "curry", "?", "-", "No", ",", "I", "cannot", "."], answer: "Can you make curry ? - No , I cannot ." },
-    { unit: "Unit 2", japanese: "これはあなたの自転車です。", words: ["This", "is", "your", "bike", "."], answer: "This is your bike ." },
-    { unit: "Unit 2", japanese: "あれは私たちの学校です。", words: ["That", "is", "our", "school", "."], answer: "That is our school ." },
-    { unit: "Unit 2", japanese: "あれはパンダですか。―はい、そうです。", words: ["Is", "that", "a panda", "?", "-", "Yes", ",", "it", "is", "."], answer: "Is that a panda ? - Yes , it is ." },
-    { unit: "Unit 2", japanese: "これは時計ですか。―いいえ、ちがいます。", words: ["Is", "this", "a clock", "?", "-", "No", ",", "it", "is", "not", "."], answer: "Is this a clock ? - No , it is not ." },
-    { unit: "Unit 2", japanese: "【チャレンジ】私は朝昼晩ピザでもいいよ。", words: ["I", "can", "eat", "pizza", "for breakfast, lunch, and dinner", "."], answer: "I can eat pizza for breakfast, lunch, and dinner ." },
+    { unit: "Unit 2", japanese: "彼は私たちの先生です。", words: ["He", "is", "our", "teacher"], answer: "He is our teacher." },
+    { unit: "Unit 2", japanese: "彼は美術部に入っていません。", words: ["He", "is", "not", "in", "the art club"], answer: "He is not in the art club." },
+    { unit: "Unit 2", japanese: "彼女は私たちの友達です。", words: ["She", "is", "our", "friend"], answer: "She is our friend." },
+    { unit: "Unit 2", japanese: "彼女はテニスファンではありません。", words: ["She", "is", "not", "a tennis fan"], answer: "She is not a tennis fan." },
+    { unit: "Unit 2", japanese: "彼は野球をするのがじょうずですか。", words: ["Is", "he", "good", "at", "playing baseball"], answer: "Is he good at playing baseball?" },
+    { unit: "Unit 2", hint: "「Is he good at playing baseball?」への返答", japanese: "はい、そうです。", words: ["Yes,", "he", "is"], answer: "Yes, he is." },
+    { unit: "Unit 2", japanese: "彼女は好意的ですか。", words: ["Is", "she", "friendly"], answer: "Is she friendly?" },
+    { unit: "Unit 2", hint: "「Is she friendly?」への返答", japanese: "いいえ、ちがいます。", words: ["No,", "she", "is", "not"], answer: "No, she is not." },
+    { unit: "Unit 2", japanese: "私は英語を読むことができます。", words: ["I", "can", "read", "English"], answer: "I can read English." },
+    { unit: "Unit 2", japanese: "私たちはじょうずに歌うことができません。", words: ["We", "cannot", "sing", "well"], answer: "We cannot sing well." },
+    { unit: "Unit 2", japanese: "あなたはピアノをひくことができますか。", words: ["Can", "you", "play", "the piano"], answer: "Can you play the piano?" },
+    { unit: "Unit 2", hint: "「Can you play the piano?」への返答", japanese: "はい、できます。", words: ["Yes,", "I", "can"], answer: "Yes, I can." },
+    { unit: "Unit 2", japanese: "あなたはカレーを作ることができますか。", words: ["Can", "you", "make", "curry"], answer: "Can you make curry?" },
+    { unit: "Unit 2", hint: "「Can you make curry?」への返答", japanese: "いいえ、できません。", words: ["No,", "I", "cannot"], answer: "No, I cannot." },
+    { unit: "Unit 2", japanese: "これはあなたの自転車です。", words: ["This", "is", "your", "bike"], answer: "This is your bike." },
+    { unit: "Unit 2", japanese: "あれは私たちの学校です。", words: ["That", "is", "our", "school"], answer: "That is our school." },
+    { unit: "Unit 2", japanese: "あれはパンダですか。", words: ["Is", "that", "a panda"], answer: "Is that a panda?" },
+    { unit: "Unit 2", hint: "「Is that a panda?」への返答", japanese: "はい、そうです。", words: ["Yes,", "it", "is"], answer: "Yes, it is." },
+    { unit: "Unit 2", japanese: "これは時計ですか。", words: ["Is", "this", "a clock"], answer: "Is this a clock?" },
+    { unit: "Unit 2", hint: "「Is this a clock?」への返答", japanese: "いいえ、ちがいます。", words: ["No,", "it", "is", "not"], answer: "No, it is not." },
+    { unit: "Unit 2", japanese: "【チャレンジ】私は朝昼晩ピザでもいいよ。", words: ["I", "can", "eat", "pizza", "for breakfast, lunch, and dinner"], answer: "I can eat pizza for breakfast, lunch, and dinner." },
 
     // === UNIT 3 ===
-    { unit: "Unit 3", japanese: "あれは何ですか。―それは学校です。", words: ["What", "is", "that", "?", "-", "It", "is", "a school", "."], answer: "What is that ? - It is a school ." },
-    { unit: "Unit 3", japanese: "こちらはだれですか。―彼は裕太です。", words: ["Who", "is", "this", "?", "-", "He", "is", "Yuta", "."], answer: "Who is this ? - He is Yuta ." },
-    { unit: "Unit 3", japanese: "あなたはどのように店に来ますか。―私は歩いて店に来ます。", words: ["How", "do", "you", "come", "to", "the shop", "?", "-", "I", "walk", "to", "the shop", "."], answer: "How do you come to the shop ? - I walk to the shop ." },
-    { unit: "Unit 3", japanese: "あなたはいつテニスをしますか。", words: ["When", "do", "you", "play", "tennis", "?"], answer: "When do you play tennis ?" },
-    { unit: "Unit 3", japanese: "私のバッグはどこにありますか。―それはあなたの部屋の中にあります。", words: ["Where", "is", "my", "bag", "?", "-", "It", "is", "in", "your room", "."], answer: "Where is my bag ? - It is in your room ." },
+    { unit: "Unit 3", japanese: "あれは何ですか。", words: ["What", "is", "that"], answer: "What is that?" },
+    { unit: "Unit 3", hint: "「What is that?」への返答", japanese: "それは学校です。", words: ["It", "is", "a school"], answer: "It is a school." },
+    { unit: "Unit 3", japanese: "こちらはだれですか。", words: ["Who", "is", "this"], answer: "Who is this?" },
+    { unit: "Unit 3", hint: "「Who is this?」への返答", japanese: "彼は裕太です。", words: ["He", "is", "Yuta"], answer: "He is Yuta." },
+    { unit: "Unit 3", japanese: "あなたはどのように店に来ますか。", words: ["How", "do", "you", "come", "to the shop"], answer: "How do you come to the shop?" },
+    { unit: "Unit 3", hint: "「How do you come to the shop?」への返答", japanese: "私は歩いて店に来ます。", words: ["I", "walk", "to the shop"], answer: "I walk to the shop." },
+    { unit: "Unit 3", japanese: "あなたはいつテニスをしますか。", words: ["When", "do", "you", "play", "tennis"], answer: "When do you play tennis?" },
+    { unit: "Unit 3", japanese: "私のバッグはどこにありますか。", words: ["Where", "is", "my", "bag"], answer: "Where is my bag?" },
+    { unit: "Unit 3", hint: "「Where is my bag?」への返答", japanese: "それはあなたの部屋の中にあります。", words: ["It", "is", "in", "your room"], answer: "It is in your room." },
 
     // === UNIT 4 ===
-    { unit: "Unit 4", japanese: "あなたはリンゴを何個ほしいですか。―私は3個のリンゴがほしいです。", words: ["How", "many", "apples", "do", "you", "want", "?", "-", "I", "want", "three", "apples", "."], answer: "How many apples do you want ? - I want three apples ." },
-    { unit: "Unit 4", japanese: "何時ですか。―11時です。", words: ["What", "time", "is", "it", "?", "-", "It", "is", "eleven", "."], answer: "What time is it ? - It is eleven ." },
-    { unit: "Unit 4", japanese: "あなたはどんな音楽が好きですか。―私はロックが好きです。", words: ["What", "music", "do", "you", "like", "?", "-", "I", "like", "rock", "."], answer: "What music do you like ? - I like rock ." },
-    { unit: "Unit 4", japanese: "私の傘を使いなさい。", words: ["Use", "my", "umbrella", "."], answer: "Use my umbrella ." },
-    { unit: "Unit 4", japanese: "親切にして、彩。", words: ["Be", "kind", ",", "Aya", "."], answer: "Be kind , Aya ." },
-    { unit: "Unit 4", japanese: "走ってはいけません。", words: ["Don't", "run", "."], answer: "Don't run ." },
+    { unit: "Unit 4", japanese: "あなたはリンゴを何個ほしいですか。", words: ["How", "many", "apples", "do", "you", "want"], answer: "How many apples do you want?" },
+    { unit: "Unit 4", hint: "「How many apples do you want?」への返答", japanese: "私は3個のリンゴがほしいです。", words: ["I", "want", "three", "apples"], answer: "I want three apples." },
+    { unit: "Unit 4", japanese: "何時ですか。", words: ["What", "time", "is", "it"], answer: "What time is it?" },
+    { unit: "Unit 4", hint: "「What time is it?」への返答", japanese: "11時です。", words: ["It", "is", "eleven"], answer: "It is eleven." },
+    { unit: "Unit 4", japanese: "あなたはどんな音楽が好きですか。", words: ["What", "music", "do", "you", "like"], answer: "What music do you like?" },
+    { unit: "Unit 4", hint: "「What music do you like?」への返答", japanese: "私はロックが好きです。", words: ["I", "like", "rock"], answer: "I like rock." },
+    { unit: "Unit 4", japanese: "私の傘を使いなさい。", words: ["Use", "my", "umbrella"], answer: "Use my umbrella." },
+    { unit: "Unit 4", japanese: "親切にして、彩。", words: ["Be", "kind,", "Aya"], answer: "Be kind, Aya." },
+    { unit: "Unit 4", japanese: "走ってはいけません。", words: ["Don't", "run"], answer: "Don't run." },
 
     // === UNIT 5 ===
-    { unit: "Unit 5", japanese: "絵美は毎日バスケットボールをします。", words: ["Emi", "plays", "basketball", "every day", "."], answer: "Emi plays basketball every day ." },
-    { unit: "Unit 5", japanese: "私の兄はアメリカに住んでいます。", words: ["My", "brother", "lives", "in America", "."], answer: "My brother lives in America ." },
-    { unit: "Unit 5", japanese: "ブラウンさんはたいてい昼食にカレーを食べます。", words: ["Mr. Brown", "usually", "eats", "curry and rice", "for lunch", "."], answer: "Mr. Brown usually eats curry and rice for lunch ." },
-    { unit: "Unit 5", japanese: "亮は週末によく図書館に行きます。", words: ["Ryo", "often", "goes", "to", "the library", "on weekends", "."], answer: "Ryo often goes to the library on weekends ." },
-    { unit: "Unit 5", japanese: "エレンはてんぷらが好きですか。―はい、好きです。", words: ["Does", "Ellen", "like", "tempura", "?", "-", "Yes", ",", "she", "does", "."], answer: "Does Ellen like tempura ? - Yes , she does ." },
-    { unit: "Unit 5", japanese: "健はピアノをひきますか。―いいえ、ひきません。", words: ["Does", "Ken", "play", "the piano", "?", "-", "No", ",", "he", "does", "not", "."], answer: "Does Ken play the piano ? - No , he does not ." },
-    { unit: "Unit 5", japanese: "アレックスは牛乳が好きではありません。", words: ["Alex", "does", "not", "like", "milk", "."], answer: "Alex does not like milk ." },
-    { unit: "Unit 5", japanese: "私の姉はテニスをしません。", words: ["My sister", "doesn't", "play", "tennis", "."], answer: "My sister doesn't play tennis ." },
-    { unit: "Unit 5", japanese: "【チャレンジ】ぼくのイヌはときどき新聞を読むんだ。", words: ["My dog", "sometimes", "reads", "a newspaper", "."], answer: "My dog sometimes reads a newspaper ." },
+    { unit: "Unit 5", japanese: "絵美は毎日バスケットボールをします。", words: ["Emi", "plays", "basketball", "every day"], answer: "Emi plays basketball every day." },
+    { unit: "Unit 5", japanese: "私の兄はアメリカに住んでいます。", words: ["My", "brother", "lives", "in America"], answer: "My brother lives in America." },
+    { unit: "Unit 5", japanese: "ブラウンさんはたいてい昼食にカレーを食べます。", words: ["Mr. Brown", "usually", "eats", "curry and rice", "for lunch"], answer: "Mr. Brown usually eats curry and rice for lunch." },
+    { unit: "Unit 5", japanese: "亮は週末によく図書館に行きます。", words: ["Ryo", "often", "goes", "to the library", "on weekends"], answer: "Ryo often goes to the library on weekends." },
+    { unit: "Unit 5", japanese: "エレンはてんぷらが好きですか。", words: ["Does", "Ellen", "like", "tempura"], answer: "Does Ellen like tempura?" },
+    { unit: "Unit 5", hint: "「Does Ellen like tempura?」への返答", japanese: "はい、好きです。", words: ["Yes,", "she", "does"], answer: "Yes, she does." },
+    { unit: "Unit 5", japanese: "健はピアノをひきますか。", words: ["Does", "Ken", "play", "the piano"], answer: "Does Ken play the piano?" },
+    { unit: "Unit 5", hint: "「Does Ken play the piano?」への返答", japanese: "いいえ、ひきません。", words: ["No,", "he", "does", "not"], answer: "No, he does not." },
+    { unit: "Unit 5", japanese: "アレックスは牛乳が好きではありません。", words: ["Alex", "does", "not", "like", "milk"], answer: "Alex does not like milk." },
+    { unit: "Unit 5", japanese: "私の姉はテニスをしません。", words: ["My sister", "doesn't", "play", "tennis"], answer: "My sister doesn't play tennis." },
+    { unit: "Unit 5", japanese: "【チャレンジ】ぼくのイヌはときどき新聞を読むんだ。", words: ["My dog", "sometimes", "reads", "a newspaper"], answer: "My dog sometimes reads a newspaper." },
 
     // === UNIT 6 ===
-    { unit: "Unit 6", japanese: "あの人はジョーンズさんです。あなたは彼を知っていますか。", words: ["That is Mr. Jones.", "Do", "you", "know", "him", "?"], answer: "That is Mr. Jones. Do you know him ?" },
-    { unit: "Unit 6", japanese: "あの人はジェーンです。あなたは彼女が好きですか。", words: ["That is Jane.", "Do", "you", "like", "her", "?"], answer: "That is Jane. Do you like her ?" },
-    { unit: "Unit 6", japanese: "これはだれのカップですか。―それはあなたのものです。", words: ["Whose", "cup", "is", "this", "?", "-", "It", "is", "yours", "."], answer: "Whose cup is this ? - It is yours ." },
-    { unit: "Unit 6", japanese: "あれはだれのベッドですか。―それは私の母のものです。", words: ["Whose", "bed", "is", "that", "?", "-", "It's", "my mother's", "."], answer: "Whose bed is that ? - It's my mother's ." },
-    { unit: "Unit 6", japanese: "あなたはサッカーとテニスのどちらをしますか。―私はテニスをします。", words: ["Which", "do", "you", "play", ",", "soccer", "or", "tennis", "?", "-", "I", "play", "tennis", "."], answer: "Which do you play , soccer or tennis ? - I play tennis ." },
+    { unit: "Unit 6", hint: "「That is Mr. Jones.」に続けて", japanese: "あなたは彼を知っていますか。", words: ["Do", "you", "know", "him"], answer: "Do you know him?" },
+    { unit: "Unit 6", hint: "「That is Jane.」に続けて", japanese: "あなたは彼女が好きですか。", words: ["Do", "you", "like", "her"], answer: "Do you like her?" },
+    { unit: "Unit 6", japanese: "これはだれのカップですか。", words: ["Whose", "cup", "is", "this"], answer: "Whose cup is this?" },
+    { unit: "Unit 6", hint: "「Whose cup is this?」への返答", japanese: "それはあなたのものです。", words: ["It", "is", "yours"], answer: "It is yours." },
+    { unit: "Unit 6", japanese: "あれはだれのベッドですか。", words: ["Whose", "bed", "is", "that"], answer: "Whose bed is that?" },
+    { unit: "Unit 6", hint: "「Whose bed is that?」への返答", japanese: "それは私の母のものです。", words: ["It's", "my mother's"], answer: "It's my mother's." },
+    { unit: "Unit 6", japanese: "あなたはサッカーとテニスのどちらをしますか。", words: ["Which", "do", "you", "play,", "soccer", "or", "tennis"], answer: "Which do you play, soccer or tennis?" },
+    { unit: "Unit 6", hint: "「Which do you play, soccer or tennis?」への返答", japanese: "私はテニスをします。", words: ["I", "play", "tennis"], answer: "I play tennis." },
 
     // === UNIT 7 ===
-    { unit: "Unit 7", japanese: "私は今、昼食を食べています。", words: ["I", "am", "eating", "lunch", "now", "."], answer: "I am eating lunch now ." },
-    { unit: "Unit 7", japanese: "彼らは今、数学を勉強しています。", words: ["They", "are", "studying", "math", "now", "."], answer: "They are studying math now ." },
-    { unit: "Unit 7", japanese: "姉は今、英語の本を読んでいます。", words: ["My sister", "is", "reading", "an English book", "now", "."], answer: "My sister is reading an English book now ." },
-    { unit: "Unit 7", japanese: "あなたはテレビを見ていますか。―はい、そうです。", words: ["Are", "you", "watching", "TV", "?", "-", "Yes", ",", "I", "am", "."], answer: "Are you watching TV ? - Yes , I am ." },
-    { unit: "Unit 7", japanese: "ボブは紅茶を飲んでいますか。―いいえ、ちがいます。", words: ["Is", "Bob", "drinking", "tea", "?", "-", "No", ",", "he", "is", "not", "."], answer: "Is Bob drinking tea ? - No , he is not ." },
-    { unit: "Unit 7", japanese: "あなたたちは何をしていますか。―私たちは泳いでいます。", words: ["What", "are", "you", "doing", "?", "-", "We", "are", "swimming", "."], answer: "What are you doing ? - We are swimming ." },
-    { unit: "Unit 7", japanese: "なんて美しいのでしょう！", words: ["How", "beautiful", "!"], answer: "How beautiful !" },
-    { unit: "Unit 7", japanese: "なんて小さな子イヌでしょう！", words: ["What", "a", "small", "puppy", "!"], answer: "What a small puppy !" },
+    { unit: "Unit 7", japanese: "私は今、昼食を食べています。", words: ["I", "am", "eating", "lunch", "now"], answer: "I am eating lunch now." },
+    { unit: "Unit 7", japanese: "彼らは今、数学を勉強しています。", words: ["They", "are", "studying", "math", "now"], answer: "They are studying math now." },
+    { unit: "Unit 7", japanese: "姉は今、英語の本を読んでいます。", words: ["My sister", "is", "reading", "an English book", "now"], answer: "My sister is reading an English book now." },
+    { unit: "Unit 7", japanese: "あなたはテレビを見ていますか。", words: ["Are", "you", "watching", "TV"], answer: "Are you watching TV?" },
+    { unit: "Unit 7", hint: "「Are you watching TV?」への返答", japanese: "はい、そうです。", words: ["Yes,", "I", "am"], answer: "Yes, I am." },
+    { unit: "Unit 7", japanese: "ボブは紅茶を飲んでいますか。", words: ["Is", "Bob", "drinking", "tea"], answer: "Is Bob drinking tea?" },
+    { unit: "Unit 7", hint: "「Is Bob drinking tea?」への返答", japanese: "いいえ、ちがいます。", words: ["No,", "he", "is", "not"], answer: "No, he is not." },
+    { unit: "Unit 7", japanese: "あなたたちは何をしていますか。", words: ["What", "are", "you", "doing"], answer: "What are you doing?" },
+    { unit: "Unit 7", hint: "「What are you doing?」への返答", japanese: "私たちは泳いでいます。", words: ["We", "are", "swimming"], answer: "We are swimming." },
+    { unit: "Unit 7", japanese: "なんて美しいのでしょう！", words: ["How", "beautiful"], answer: "How beautiful!" },
+    { unit: "Unit 7", japanese: "なんて小さな子イヌでしょう！", words: ["What", "a", "small", "puppy"], answer: "What a small puppy!" },
 
     // === UNIT 8 ===
-    { unit: "Unit 8", japanese: "和也は先生になりたいと思っています。", words: ["Kazuya", "wants", "to", "become", "a teacher", "."], answer: "Kazuya wants to become a teacher ." },
-    { unit: "Unit 8", japanese: "絵美はいつも英語を話そうと試みます。", words: ["Emi", "always", "tries", "to", "speak", "English", "."], answer: "Emi always tries to speak English ." },
-    { unit: "Unit 8", japanese: "あなたはどこに行きたいですか。―私は奈良に行きたいです。", words: ["Where", "do", "you", "want", "to", "go", "?", "-", "I", "want", "to", "go", "to", "Nara", "."], answer: "Where do you want to go ? - I want to go to Nara ." },
-    { unit: "Unit 8", japanese: "私の母は幸せそうに見えます。", words: ["My mother", "looks", "happy", "."], answer: "My mother looks happy ." },
-    { unit: "Unit 8", japanese: "彼女のかばんは新しそうに見えません。", words: ["Her bag", "does", "not", "look", "new", "."], answer: "Her bag does not look new ." },
-    { unit: "Unit 8", japanese: "【チャレンジ】一日中ベッドの上にいたいな。", words: ["I", "want", "to", "stay", "in bed", "all day", "."], answer: "I want to stay in bed all day ." },
+    { unit: "Unit 8", japanese: "和也は先生になりたいと思っています。", words: ["Kazuya", "wants", "to", "become", "a teacher"], answer: "Kazuya wants to become a teacher." },
+    { unit: "Unit 8", japanese: "絵美はいつも英語を話そうと試みます。", words: ["Emi", "always", "tries", "to", "speak", "English"], answer: "Emi always tries to speak English." },
+    { unit: "Unit 8", japanese: "あなたはどこに行きたいですか。", words: ["Where", "do", "you", "want", "to", "go"], answer: "Where do you want to go?" },
+    { unit: "Unit 8", hint: "「Where do you want to go?」への返答", japanese: "私は奈良に行きたいです。", words: ["I", "want", "to", "go", "to", "Nara"], answer: "I want to go to Nara." },
+    { unit: "Unit 8", japanese: "私の母は幸せそうに見えます。", words: ["My mother", "looks", "happy"], answer: "My mother looks happy." },
+    { unit: "Unit 8", japanese: "彼女のかばんは新しそうに見えません。", words: ["Her bag", "does", "not", "look", "new"], answer: "Her bag does not look new." },
+    { unit: "Unit 8", japanese: "【チャレンジ】一日中ベッドの上にいたいな。", words: ["I", "want", "to", "stay", "in bed", "all day"], answer: "I want to stay in bed all day." },
 
     // === UNIT 9 ===
-    { unit: "Unit 9", japanese: "私は先週将棋をしました。", words: ["I", "played", "shogi", "last week", "."], answer: "I played shogi last week ." },
-    { unit: "Unit 9", japanese: "私はたくさんの人々をそのパーティーで見ました。", words: ["I", "saw", "many", "people", "at the party", "."], answer: "I saw many people at the party ." },
-    { unit: "Unit 9", japanese: "小野さんはこの冬金沢を訪れました。", words: ["Ms. Ono", "visited", "Kanazawa", "this winter", "."], answer: "Ms. Ono visited Kanazawa this winter ." },
-    { unit: "Unit 9", japanese: "私は今朝友達に会いました。", words: ["I", "met", "my friends", "this morning", "."], answer: "I met my friends this morning ." },
-    { unit: "Unit 9", japanese: "ボブは妹の宿題を手伝いました。", words: ["Bob", "helped", "his sister", "with", "her homework", "."], answer: "Bob helped his sister with her homework ." },
-    { unit: "Unit 9", japanese: "私たちは図書館に行ってそこで勉強しました。", words: ["We", "went", "to", "the library", "and", "studied", "there", "."], answer: "We went to the library and studied there ." },
-    { unit: "Unit 9", japanese: "あなたはこの前の日曜日に音楽を聞きましたか。―はい、聞きました。", words: ["Did", "you", "listen", "to", "music", "last Sunday", "?", "-", "Yes", ",", "I", "did", "."], answer: "Did you listen to music last Sunday ? - Yes , I did ." },
-    { unit: "Unit 9", japanese: "由香は自分の部屋をそうじしましたか。―いいえ、しませんでした。", words: ["Did", "Yuka", "clean", "her room", "?", "-", "No", ",", "she", "did", "not", "."], answer: "Did Yuka clean her room ? - No , she did not ." },
-    { unit: "Unit 9", japanese: "あなたのお父さんは昼食を作りましたか。―いいえ、作りませんでした。", words: ["Did", "your father", "make", "lunch", "?", "-", "No", ",", "he", "didn't", "."], answer: "Did your father make lunch ? - No , he didn't ." },
-    { unit: "Unit 9", japanese: "彼らは今日ケーキを買いましたか。―はい、買いました。", words: ["Did", "they", "buy", "any", "cakes", "today", "?", "-", "Yes", ",", "they", "did", "."], answer: "Did they buy any cakes today ? - Yes , they did ." },
-    { unit: "Unit 9", japanese: "その生徒たちは先月何を楽しみましたか。", words: ["What", "did", "the students", "enjoy", "last month", "?"], answer: "What did the students enjoy last month ?" },
-    { unit: "Unit 9", japanese: "私たちは昨年英国に行きませんでした。", words: ["We", "did", "not", "go", "to", "the U.K.", "last year", "."], answer: "We did not go to the U.K. last year ." },
-    { unit: "Unit 9", japanese: "妹はこの前の日曜日にサッカーの練習をしませんでした。", words: ["My sister", "didn't", "practice", "soccer", "last Sunday", "."], answer: "My sister didn't practice soccer last Sunday ." },
-    { unit: "Unit 9", japanese: "私たちはこの夏、写真を撮りませんでした。", words: ["We", "did", "not", "take", "pictures", "this summer", "."], answer: "We did not take pictures this summer ." },
-    { unit: "Unit 9", japanese: "ボブと咲は先週宿題をしませんでした。", words: ["Bob and Saki", "did", "not", "do", "their", "homework", "last week", "."], answer: "Bob and Saki did not do their homework last week ." },
-    { unit: "Unit 9", japanese: "私は今日朝食を食べませんでした。", words: ["I", "didn't", "eat", "breakfast", "today", "."], answer: "I didn't eat breakfast today ." },
-    { unit: "Unit 9", japanese: "【チャレンジ】昨日、クッキーを全部食べたよ。", words: ["I", "ate", "all the cookies", "yesterday", "."], answer: "I ate all the cookies yesterday ." },
+    { unit: "Unit 9", japanese: "私は先週将棋をしました。", words: ["I", "played", "shogi", "last week"], answer: "I played shogi last week." },
+    { unit: "Unit 9", japanese: "私はたくさんの人々をそのパーティーで見ました。", words: ["I", "saw", "many", "people", "at the party"], answer: "I saw many people at the party." },
+    { unit: "Unit 9", japanese: "小野さんはこの冬金沢を訪れました。", words: ["Ms. Ono", "visited", "Kanazawa", "this winter"], answer: "Ms. Ono visited Kanazawa this winter." },
+    { unit: "Unit 9", japanese: "私は今朝友達に会いました。", words: ["I", "met", "my friends", "this morning"], answer: "I met my friends this morning." },
+    { unit: "Unit 9", japanese: "ボブは妹の宿題を手伝いました。", words: ["Bob", "helped", "his sister", "with", "her homework"], answer: "Bob helped his sister with her homework." },
+    { unit: "Unit 9", japanese: "私たちは図書館に行ってそこで勉強しました。", words: ["We", "went", "to the library", "and", "studied", "there"], answer: "We went to the library and studied there." },
+    { unit: "Unit 9", japanese: "あなたはこの前の日曜日に音楽を聞きましたか。", words: ["Did", "you", "listen", "to", "music", "last Sunday"], answer: "Did you listen to music last Sunday?" },
+    { unit: "Unit 9", hint: "「Did you listen to music last Sunday?」への返答", japanese: "はい、聞きました。", words: ["Yes,", "I", "did"], answer: "Yes, I did." },
+    { unit: "Unit 9", japanese: "由香は自分の部屋をそうじしましたか。", words: ["Did", "Yuka", "clean", "her room"], answer: "Did Yuka clean her room?" },
+    { unit: "Unit 9", hint: "「Did Yuka clean her room?」への返答", japanese: "いいえ、しませんでした。", words: ["No,", "she", "did", "not"], answer: "No, she did not." },
+    { unit: "Unit 9", japanese: "あなたのお父さんは昼食を作りましたか。", words: ["Did", "your father", "make", "lunch"], answer: "Did your father make lunch?" },
+    { unit: "Unit 9", hint: "「Did your father make lunch?」への返答", japanese: "いいえ、作りませんでした。", words: ["No,", "he", "didn't"], answer: "No, he didn't." },
+    { unit: "Unit 9", japanese: "彼らは今日ケーキを買いましたか。", words: ["Did", "they", "buy", "any", "cakes", "today"], answer: "Did they buy any cakes today?" },
+    { unit: "Unit 9", hint: "「Did they buy any cakes today?」への返答", japanese: "はい、買いました。", words: ["Yes,", "they", "did"], answer: "Yes, they did." },
+    { unit: "Unit 9", japanese: "その生徒たちは先月何を楽しみましたか。", words: ["What", "did", "the students", "enjoy", "last month"], answer: "What did the students enjoy last month?" },
+    { unit: "Unit 9", japanese: "私たちは昨年英国に行きませんでした。", words: ["We", "did", "not", "go", "to the U.K.", "last year"], answer: "We did not go to the U.K. last year." },
+    { unit: "Unit 9", japanese: "妹はこの前の日曜日にサッカーの練習をしませんでした。", words: ["My sister", "didn't", "practice", "soccer", "last Sunday"], answer: "My sister didn't practice soccer last Sunday." },
+    { unit: "Unit 9", japanese: "私たちはこの夏、写真を撮りませんでした。", words: ["We", "did", "not", "take", "pictures", "this summer"], answer: "We did not take pictures this summer." },
+    { unit: "Unit 9", japanese: "ボブと咲は先週宿題をしませんでした。", words: ["Bob and Saki", "did", "not", "do", "their", "homework", "last week"], answer: "Bob and Saki did not do their homework last week." },
+    { unit: "Unit 9", japanese: "私は今日朝食を食べませんでした。", words: ["I", "didn't", "eat", "breakfast", "today"], answer: "I didn't eat breakfast today." },
+    { unit: "Unit 9", japanese: "【チャレンジ】昨日、クッキーを全部食べたよ。", words: ["I", "ate", "all the cookies", "yesterday"], answer: "I ate all the cookies yesterday." },
 
     // === UNIT 10 ===
-    { unit: "Unit 10", japanese: "あなたは先週末、ひまでしたか。―はい、そうでした。", words: ["Were", "you", "free", "last weekend", "?", "-", "Yes", ",", "I", "was", "."], answer: "Were you free last weekend ? - Yes , I was ." },
-    { unit: "Unit 10", japanese: "私は昨年、学生でした。", words: ["I", "was", "a student", "last year", "."], answer: "I was a student last year ." },
-    { unit: "Unit 10", japanese: "私はそのとき宿題をしていました。", words: ["I", "was", "doing", "my homework", "then", "."], answer: "I was doing my homework then ." },
-    { unit: "Unit 10", japanese: "私の両親は正午に公園を歩いていませんでした。", words: ["My parents", "were", "not", "walking", "in the park", "at noon", "."], answer: "My parents were not walking in the park at noon ." },
-    { unit: "Unit 10", japanese: "あの木のそばにウサギが1羽います。", words: ["There", "is", "a rabbit", "by that tree", "."], answer: "There is a rabbit by that tree ." },
-    { unit: "Unit 10", japanese: "駅の近くに図書館はありますか。―はい、あります。", words: ["Is", "there", "a library", "near the station", "?", "-", "Yes", ",", "there", "is", "."], answer: "Is there a library near the station ? - Yes , there is ." },
-    { unit: "Unit 10", japanese: "机の上にカップが4つあります。", words: ["There", "are", "four", "cups", "on the desk", "."], answer: "There are four cups on the desk ." }
+    { unit: "Unit 10", japanese: "あなたは先週末、ひまでしたか。", words: ["Were", "you", "free", "last weekend"], answer: "Were you free last weekend?" },
+    { unit: "Unit 10", hint: "「Were you free last weekend?」への返答", japanese: "はい、そうでした。", words: ["Yes,", "I", "was"], answer: "Yes, I was." },
+    { unit: "Unit 10", japanese: "私は昨年、学生でした。", words: ["I", "was", "a student", "last year"], answer: "I was a student last year." },
+    { unit: "Unit 10", japanese: "私はそのとき宿題をしていました。", words: ["I", "was", "doing", "my homework", "then"], answer: "I was doing my homework then." },
+    { unit: "Unit 10", japanese: "私の両親は正午に公園を歩いていませんでした。", words: ["My parents", "were", "not", "walking", "in the park", "at noon"], answer: "My parents were not walking in the park at noon." },
+    { unit: "Unit 10", japanese: "あの木のそばにウサギが1羽います。", words: ["There", "is", "a rabbit", "by that tree"], answer: "There is a rabbit by that tree." },
+    { unit: "Unit 10", japanese: "駅の近くに図書館はありますか。", words: ["Is", "there", "a library", "near the station"], answer: "Is there a library near the station?" },
+    { unit: "Unit 10", hint: "「Is there a library near the station?」への返答", japanese: "はい、あります。", words: ["Yes,", "there", "is"], answer: "Yes, there is." },
+    { unit: "Unit 10", japanese: "机の上にカップが4つあります。", words: ["There", "are", "four", "cups", "on the desk"], answer: "There are four cups on the desk." }
   ];
 
   let currentQuestions = [];
@@ -379,7 +420,11 @@
   function loadQuestion(index) {
     const q = currentQuestions[index];
     document.getElementById('progress').innerText = `第 ${index + 1} 問 / ${currentQuestions.length} 問`;
-    document.getElementById('jp-text').innerText = q.japanese;
+    
+    // 対話文の場合は状況説明ヒントを上部に表示
+    const hintHtml = q.hint ? `<span class="context-hint">${q.hint}</span>` : '';
+    document.getElementById('jp-text').innerHTML = `${hintHtml}${q.japanese}`;
+    
     document.getElementById('result-box').style.display = 'none';
 
     availableWords = [...q.words].sort(() => Math.random() - 0.5);
@@ -428,17 +473,21 @@
 
   function checkAnswer() {
     const q = currentQuestions[currentIndex];
-    const userAns = userSelectedWords.join(' ');
+    
+    // 正解判定用（末尾の符号 . / ? / ! を除いて単語の並びを比較）
+    const targetClean = q.answer.replace(/[\.\?!]/g, '').trim();
+    const userClean = userSelectedWords.join(' ').replace(/[\.\?!]/g, '').trim();
+    
     const resultBox = document.getElementById('result-box');
     const title = document.getElementById('result-title');
     const correctAns = document.getElementById('correct-answer-text');
 
     resultBox.style.display = 'block';
 
-    if (userAns === q.answer) {
+    if (userClean === targetClean) {
       resultBox.className = 'result-box result-correct';
       title.innerText = '⭕ 正解！ Excellent!';
-      correctAns.innerText = '';
+      correctAns.innerText = q.answer;
     } else {
       resultBox.className = 'result-box result-wrong';
       title.innerText = '❌ 不正解... もう一度確認しよう';
