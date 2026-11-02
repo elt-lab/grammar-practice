@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>中学英文法 並べ替えマスター (中1)</title>
+  <title>中学英文法 並べ替えマスター (中1・東書)</title>
   <style>
     :root {
       --primary: #2563eb;
@@ -34,8 +34,6 @@
       border-radius: 16px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.06);
     }
-
-    /* モチベーション・ステータスボード */
     .status-dashboard {
       background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
       border: 1px solid #bfdbfe;
@@ -62,7 +60,6 @@
       font-weight: 800;
       color: #1e3a8a;
     }
-
     .header {
       display: flex;
       justify-content: space-between;
@@ -89,7 +86,6 @@
       border-radius: 12px;
       display: none;
     }
-
     .menu-list {
       display: flex;
       flex-direction: column;
@@ -144,7 +140,6 @@
     .btn-unit.cleared .stamp-badge {
       display: inline-block;
     }
-
     .jp-box {
       font-size: 18px;
       font-weight: 700;
@@ -244,10 +239,9 @@
 <div class="container">
   <!-- トップメニュー -->
   <div id="menu-view">
-    <h2 style="font-size: 20px; margin: 0 0 6px 0; text-align: center;">並べ替えドリル（1年）</h2>
+    <h2 style="font-size: 20px; margin: 0 0 6px 0; text-align: center;">並べ替えドリル（東書1年）</h2>
     <p style="font-size: 13px; color: #64748b; text-align: center; margin-bottom: 14px;">学習するUnitを選んでね！</p>
 
-    <!-- モチベーション・ダッシュボード -->
     <div class="status-dashboard">
       <div class="status-item">
         <span class="status-label">連続学習</span>
@@ -471,7 +465,21 @@
   let availableWords = [];
   let comboCount = 0;
 
-  // --- ローカルストレージ（データ保存）処理 ---
+  // 常に大文字を保つ固有名詞・単語のリスト
+  const properNouns = [
+    "I", "I'm", "Kenta", "Nagoya", "Sendai", "Tokyo", "Becky Jones",
+    "English", "Ellen", "Ken", "Alex", "Mr. Brown", "Ryo", "Emi",
+    "Mr. Jones", "Jane", "Yuta", "Aya", "Bob", "Kazuya", "Nara",
+    "Ms. Ono", "Kanazawa", "Yuka", "Saki", "U.K.", "Bob and Saki"
+  ];
+
+  function maskFirstLetter(word) {
+    if (properNouns.includes(word)) return word;
+    // 先頭のみ小文字化
+    return word.charAt(0).toLowerCase() + word.slice(1);
+  }
+
+  // --- ローカルストレージ処理 ---
   function getClearedUnits() {
     return JSON.parse(localStorage.getItem('grammar_cleared_units') || '[]');
   }
@@ -586,7 +594,21 @@
     
     document.getElementById('result-box').style.display = 'none';
 
-    availableWords = [...q.words].sort(() => Math.random() - 0.5);
+    // 固有名詞以外はすべて小文字化したチップを作成
+    const maskedWords = q.words.map(w => maskFirstLetter(w));
+
+    // 元の並び順と一致しなくなるまで確実にシャッフル（Fisher-Yatesシャッフル）
+    let shuffled = [...maskedWords];
+    let attempts = 0;
+    do {
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      attempts++;
+    } while (shuffled.length > 1 && shuffled.join(' ') === maskedWords.join(' ') && attempts < 10);
+
+    availableWords = shuffled;
     userSelectedWords = [];
     render();
   }
@@ -632,7 +654,11 @@
 
   function checkAnswer() {
     const q = currentQuestions[currentIndex];
-    const userAns = userSelectedWords.join(' ');
+    
+    // 比較用：大文字小文字をすべて無視してトークンの一致を判定
+    const userTokens = userSelectedWords.map(w => w.toLowerCase()).join(' ');
+    const correctTokens = q.words.map(w => w.toLowerCase()).join(' ');
+
     const displayAns = q.answer.replace(/\s+([,\.?!])/g, '$1');
 
     const resultBox = document.getElementById('result-box');
@@ -641,7 +667,7 @@
 
     resultBox.style.display = 'block';
 
-    if (userAns === q.answer) {
+    if (userTokens === correctTokens) {
       comboCount++;
       addTotalSolved();
       updateComboDisplay();
@@ -664,7 +690,6 @@
       currentIndex++;
       loadQuestion(currentIndex);
     } else {
-      // ユニット全問完走でスタンプ獲得
       saveClearedUnit(currentUnitId);
       alert(`🎉 おめでとう！\n${currentUnitId} のクリアスタンプ【💮 CLEAR!】を獲得しました！`);
       backToMenu();
